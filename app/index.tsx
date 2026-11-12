@@ -13,15 +13,10 @@ export default function HomeScreen() {
   useEffect(() => {
     const loadRecipes = async () => {
       try {
-        // Memanggil fungsi dari recipeService.ts
-        // Di dalam sana sudah ada sistem "fallback" (data cadangan)
-        // Jadi kalau API error, aplikasi nggak akan crash
         const data = await fetchRecipes();
         setRecipes(data);
-        setError(null); 
       } catch (err: any) {
-        setError('Terjadi kesalahan sistem saat memuat resep.');
-        console.log(err);
+        setError('Gagal memuat resep. Periksa koneksi internetmu.');
       } finally {
         setLoading(false);
       }
@@ -29,65 +24,35 @@ export default function HomeScreen() {
     loadRecipes();
   }, []);
 
-  // 1. Tampilan saat Loading (Muter-muter)
   if (loading) {
     return (
       <View style={styles.center}>
         <ActivityIndicator size="large" color="#b91c1c" />
-        <Text style={styles.loadingText}>Memuat resep Nusantara...</Text>
+        <Text style={{ marginTop: 10 }}>Memuat resep Nusantara...</Text>
       </View>
     );
   }
 
-  // 2. Tampilan kalau Error total
   if (error) {
     return (
       <View style={styles.center}>
-        <Text style={styles.errorText}>{error}</Text>
+        <Text style={{ color: 'red', padding: 20 }}>{error}</Text>
       </View>
     );
   }
 
-  // 3. Tampilan Daftar Resep
   return (
     <View style={styles.container}>
       <FlatList
         data={recipes}
         keyExtractor={(item) => item.key.toString()}
         renderItem={({ item }) => <RecipeCard recipe={item} />}
-        contentContainerStyle={styles.listContent}
       />
     </View>
   );
 }
 
-// 4. Styling
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-  },
-  loadingText: {
-    marginTop: 10,
-    fontSize: 16,
-    color: '#666',
-    fontWeight: '500',
-  },
-  errorText: {
-    color: 'red',
-    textAlign: 'center',
-    padding: 20,
-    fontSize: 16,
-  },
-  listContent: {
-    paddingBottom: 20,
-  }
+  container: { flex: 1, backgroundColor: '#f5f5f5', paddingTop: 16, paddingHorizontal: 16 },
+  center: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f5f5f5' },
 });
