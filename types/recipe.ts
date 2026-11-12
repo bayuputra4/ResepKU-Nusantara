@@ -1,6 +1,10 @@
 // types/recipe.ts
 export interface Recipe {
-  id: string;
-  name: string;
-  origin: string;
+  key: string;
+  title: string;
+  thumb: string;
+  difficulty: string;
+  times: string;
+  ingredient: string[];
+  step: string[];
 }
