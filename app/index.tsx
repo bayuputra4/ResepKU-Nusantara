@@ -1,12 +1,12 @@
 // app/index.tsx
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { dummyRecipes } from '../data/recipes';
 import { RecipeCard } from '../components/RecipeCard';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>ResepKu Nusantara</Text>
+      {/* Tulisan Header manual dihapus karena udah ada dari _layout.tsx */}
       
       <FlatList
         data={dummyRecipes}
@@ -21,14 +21,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-    paddingTop: 50,
+    paddingTop: 16, // Dikurangi karena header udah ada dari Stack
     paddingHorizontal: 16,
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
-    color: '#333',
   },
 });

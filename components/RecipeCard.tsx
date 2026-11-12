@@ -1,5 +1,6 @@
 // components/RecipeCard.tsx
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, Pressable } from 'react-native'; // Ganti View jadi Pressable
+import { Link } from 'expo-router';
 import { Recipe } from '../types/recipe';
 
 interface Props {
@@ -8,13 +9,17 @@ interface Props {
 
 export function RecipeCard({ recipe }: Props) {
   return (
-    <View style={styles.card}>
-      <Text style={styles.title}>{recipe.name}</Text>
-      <Text style={styles.origin}>{recipe.origin}</Text>
-    </View>
+    <Link href={`/recipe/${recipe.id}`} asChild>
+      {/* Pakai Pressable biar bisa diklik */}
+      <Pressable style={styles.card}>
+        <Text style={styles.title}>{recipe.name}</Text>
+        <Text style={styles.origin}>{recipe.origin}</Text>
+      </Pressable>
+    </Link>
   );
 }
 
+// ... (biarkan styles tetap sama seperti sebelumnya)
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
