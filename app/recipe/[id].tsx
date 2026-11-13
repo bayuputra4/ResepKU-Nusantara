@@ -30,7 +30,11 @@ export default function RecipeDetailScreen() {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>{recipe.title}</Text>
-      <Text style={styles.origin}>Asal: Indonesia</Text>
+      
+      {/* Bagian ini yang diubah */}
+      <Text style={styles.origin}>
+        Kategori: {recipe.difficulty} | Asal: {recipe.times}
+      </Text>
       
       <Text style={styles.sectionTitle}>Bahan-bahan:</Text>
       {recipe.ingredient?.map((item, index) => (
@@ -39,7 +43,7 @@ export default function RecipeDetailScreen() {
 
       <Text style={styles.sectionTitle}>Cara Membuat:</Text>
       {recipe.step?.map((step, index) => (
-        <Text key={index} style={styles.text}>{step}</Text>
+        <Text key={index} style={styles.text}>{index + 1}. {step}</Text>
       ))}
     </ScrollView>
   );

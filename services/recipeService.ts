@@ -8,14 +8,13 @@ const fallbackRecipes: Recipe[] = [
 
 export async function fetchRecipes(): Promise<Recipe[]> {
   try {
-    // Nembak API TheMealDB (Live API), cari makanan berbahan "chicken"
+    // API TheMealDB (Live API)
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=chicken');
     
     if (!response.ok) throw new Error('Gagal koneksi ke server');
     
     const data = await response.json();
     
-    // Kalau datanya kosong, lempar ke error
     if (!data.meals) {
       throw new Error('Data tidak ditemukan di API');
     }
