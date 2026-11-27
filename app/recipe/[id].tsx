@@ -1,6 +1,6 @@
 // app/recipe/[id].tsx
 import { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { Recipe } from '../../types/recipe';
 import { fetchRecipeDetail } from '../../services/recipeService';

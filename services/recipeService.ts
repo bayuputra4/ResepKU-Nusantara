@@ -1,7 +1,6 @@
 // services/recipeService.ts
 import { Recipe } from '../types/recipe';
 
-// Data cadangan kalau internet mati
 const fallbackRecipes: Recipe[] = [
   { key: '1', title: 'Fallback Resep (Mode Offline)', thumb: '', difficulty: 'Sulit', times: '2 Jam', ingredient: ['Bahan'], step: ['Langkah'] }
 ];
@@ -23,12 +22,12 @@ export async function fetchRecipes(): Promise<Recipe[]> {
       key: item.idMeal,
       title: item.strMeal,
       thumb: item.strMealThumb,
-      difficulty: item.strCategory || 'Mudah', // Ambil kategori sebagai difficulty
-      times: item.strArea || 'Waktu tidak diketahui', // Ambil area asal
+      difficulty: item.strCategory || 'Mudah', 
+      times: item.strArea || 'Waktu tidak diketahui', 
       ingredient: [],
       step: []
     }));
-  } catch (error) {
+  } catch {
     console.log("Error API, menggunakan data cadangan.");
     return fallbackRecipes; 
   }
@@ -72,7 +71,6 @@ export async function fetchRecipeDetail(id: string): Promise<Recipe> {
   }
 }
 
-// Fungsi untuk kriteria .then(), resolve(), reject()
 export function cekKoneksiServer(): Promise<string> {
   return new Promise((resolve, reject) => {
     const isServerOnline = true;

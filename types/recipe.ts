@@ -1,4 +1,3 @@
-// types/recipe.ts
 export interface Recipe {
   key: string;
   title: string;
